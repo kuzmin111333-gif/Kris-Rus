@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадебное приглашение</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: #f6f1eb;
+  font-family: Inter;
+  color: #4a3b2f;
+  text-align: center;
+}
+
+/* стартовый экран */
+#cover {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f6f1eb;
+}
+
+.photo-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.photo-row img {
+  border-radius: 14px;
+  object-fit: cover;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+.side {
+  width: 140px;
+  height: 200px;
+  opacity: 0.7;
+}
+
+.main-photo {
+  width: 220px;
+  height: 320px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.main-photo:hover {
+  transform: scale(1.05);
+}
+
+.tap-text {
+  margin-top: 25px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* основной блок */
+#mainSite {
+  display: none;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond';
+  font-size: 48px;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+/* секции */
+section {
+  padding: 70px 20px;
+  max-width: 720px;
+  margin: auto;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond';
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+/* календарь с сердечком */
+.paper-calendar {
+  background: #fffdf9;
+  padding: 40px 30px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  margin: auto;
+}
+
+.calendar-title {
+  font-family: 'Cormorant Garamond';
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  font-size: 16px;
+}
+
+.calendar-grid div:nth-child(-n+7) {
+  font-weight: 600;
+  color: #7c6c60;
+}
+
+.wedding-day {
+  position: relative;
+  font-weight: 700;
+}
+
+.wedding-day::before {
+  content: "❤️";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 34px;
+  z-index: -1;
+}
+
+/* музыка */
+.music {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #6b4c3b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* RSVP */
+.rsvp input,
+.rsvp select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5ded6;
+  font-size: 16px;
+}
+
+.submit {
+  margin-top: 15px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #6b4c3b;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit:hover {
+  background: #553c2f;
+}
+
+.success {
+  display: none;
+  margin-top: 20px;
+  background: #f3ebe4;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 15px 35px rgba(0,0,0,0.1);
+margin-top:20px;
+}
+
+.paper-calendar{
+
+background:#fffdf9;
+padding:40px 30px;
+border-radius:14px;
+box-shadow:0 20px 40px rgba(0,0,0,0.08);
+max-width:420px;
+margin:auto;
+position:relative;
+
+animation:fadeIn 5.2s ease;
+}
+
+.paper-top{
+width:100%;
+height:20px;
+background:repeating-linear-gradient(
+90deg,
+#e8e2db,
+#e8e2db 10px,
+#f6f1eb 10px,
+#f6f1eb 20px
+);
+border-radius:6px 6px 0 0;
+position:absolute;
+top:-10px;
+left:0;
+}
+
+.calendar-title{
+font-family:'Cormorant Garamond';
+font-size:30px;
+margin-bottom:20px;
+}
+
+.calendar-grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:12px;
+font-size:16px;
+}
+
+.calendar-grid div{
+padding:6px 0;
+}
+
+.calendar-grid div:nth-child(-n+7){
+font-weight:600;
+color:#7c6c60;
+}
+
+.wedding-day{
+position:relative;
+font-weight:700;
+z-index:2;
+}
+
+.wedding-day::before{
+
+content:"";
+
+position:absolute;
+width:42px;
+height:36px;
+
+left:50%;
+top:50%;
+
+transform:translate(-50%,-50%);
+
+background:url("heart.png") center/contain no-repeat;
+
+z-index:-1;
+
+
+}
+.button{
+display:inline-block;
+margin-top:10px;
+padding:12px 20px;
+background:#6b4c3b;
+color:white;
+border-radius:25px;
+text-decoration:none;
+}
+
+.timeline{
+margin-top:20px;
+}
+
+.event{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 0;
+border-bottom:1px dotted #bfae9e;
+}
+
+.colors{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:15px;
+flex-wrap:wrap;
+}
+.color{
+width:45px;
+height:45px;
+border-radius:50%;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.gallery img{
+width:100%;
+border-radius:8px;
+transform:rotate(-2deg);
+}
+
+.gallery img:nth-child(2){
+transform:rotate(2deg);
+}
+
+.gallery img:nth-child(3){
+transform:rotate(1deg);
+}
+
+.gallery img:nth-child(4){
+transform:rotate(-1deg);
+}
+
+.note{
+background:#fffdf9;
+border:1px solid #eee;
+padding:25px;
+border-radius:12px;
+}
+
+.contacts{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:20px;
+}
+
+.rsvp{
+max-width:450px;
+margin:auto;
+}
+
+.rsvp input,
+.rsvp select{
+width:100%;
+padding:14px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #e5ded6;
+font-size:16px;
+}
+
+.circle{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#6b4c3b;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:22px;
+text-decoration:none;
+}
+
+.attendance{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.option:hover{
+border:1px solid #d4c3b5;
+}
+
+.option input{
+width:auto;
+}
+
+.main-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- стартовый экран -->
+<section id="cover">
+  <div class="photo-row">
+    <img src="photo1.jpg" class="side">
+    <img src="photo_main.jpg" class="main-photo" id="mainPhoto">
+    <img src="photo2.jpg" class="side">
+  </div>
+  <p class="tap-text">Нажмите на фотографию</p>
+</section>
+
+<!-- основной сайт -->
+<div id="mainSite">
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music" onclick="toggleMusic()">Музыка</button>
+
+  <section class="hero" id="hero">
+    <h1>Кристина & Руслан</h1>
+    <p>приглашают Вас на свою свадьбу</p>
+  </section>
+
+  <section>
+
+  <h2>Дорогие родные и друзья</h2>
+
+  <div class="card">
+
+  <p>
+  Мы будем счастливы разделить
+  самый важный день нашей жизни вместе с вами.
+  </p>
+
+  </div>
+
+  </section>
+  <section>
+    <h2>Дата свадьбы</h2>
+      
+      <div class="paper-calendar">
+
+      <div class="paper-top"></div>
+
+      <div class="calendar-title">
+      Июнь 2026
+      </div>
+
+      <div class="calendar-grid">
+        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div>1</div>
+        <div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+        <div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+        <div class="wedding-day">15</div>
+        <div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div>
+        <div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div>
+        <div>30</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+
+  <h2>Место проведения</h2>
+
+  <div class="card location">
+
+  <img src="location.jpg">
+
+  <p>Загородный клуб "Лесная сказка"</p>
+
+  <p>ул. Лесная 15</p>
+
+  <a class="button" href="#">Открыть карту</a>
+
+  </div>
+
+  </section>
+
+  <section>
+
+  <h2>Программа дня</h2>
+
+  <div class="card timeline">
+
+  <div class="event">
+  <span>15:00</span>
+  <span>Сбор гостей</span>
+  </div>
+
+  <div class="event">
+  <span>16:00</span>
+  <span>Церемония</span>
+  </div>
+
+  <div class="event">
+  <span>17:00</span>
+  <span>Банкет</span>
+  </div>
+
+  <div class="event">
+  <span>22:00</span>
+  <span>Торт</span>
+  </div>
+
+  </div>
+
+  </section>
+
+  <section>
+
+  <h2>Дресс-код</h2>
+
+  <div class="card">
+
+  <p>Нам будет приятно если вы поддержите цветовую гамму праздника</p>
+
+  <div class="colors">
+
+  <div class="color" style="background:#e7d6c8"></div>
+  <div class="color" style="background:#cbb199"></div>
+  <div class="color" style="background:#a9896f"></div>
+  <div class="color" style="background:#6b4c3b"></div>
+  <div class="color" style="background:#d6c2a8"></div>
+  <div class="color" style="background:#8c7a6b"></div>
+
+  </div>
+
+  </div>
+
+  </section>
+
+  <section>
+
+  <h2>Фотографии</h2>
+
+  <div class="gallery">
+
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+  <img src="photo4.jpg">
+
+  </div>
+
+  </section>
+
+  <section>
+   <h2>Подтвердите присутствие</h2>
+
+   <div class="card rsvp">
+
+   <form id="rsvpForm">
+
+   <input type="text" required placeholder="Имя и фамилия" class="main-input">
+
+   <div class="attendance">
+
+   <label class="option">
+   <input type="radio" name="attendance" value="yes" required>
+   <span>Буду присутствовать</span>
+   </label>
+
+   <label class="option">
+   <input type="radio" name="attendance" value="no">
+   <span>К сожалению, не смогу</span>
+   </label>
+
+   </div>
+
+   <select required>
+
+   <option value="">Предпочтения по еде</option>
+   <option>Мясо</option>
+   <option>Рыба</option>
+   <option>Вегетарианское</option>
+
+   </select>
+
+   <button class="submit">Отправить ответ</button>
+
+   </form>
+
+   <div class="success" id="successMsg">
+   Спасибо! Мы получили ваш ответ ❤️
+   </div>
+
+   </div>
+
+
+
+   <h2>Что делать если?</h2>
+
+   <div class="note">
+
+   <p>По всем вопросам в день свадьбы обращайтесь к организатору</p>
+
+   <div class="contacts">
+
+   <a class="circle" href="#">☎</a>
+   <a class="circle" href="#">W</a>
+   <a class="circle" href="#">T</a>
+
+   </div>
+
+   </div>
+
+  </div>
+
+  </section>
+</div>
+
+<script>
+const mainPhoto = document.getElementById("mainPhoto");
+const cover = document.getElementById("cover");
+const mainSite = document.getElementById("mainSite");
+const hero = document.getElementById("hero");
+const music = document.getElementById("music");
+
+// Открытие основного сайта
+mainPhoto.addEventListener("click", () => {
+  hero.style.backgroundImage = "url('photo_main.jpg')";
+  cover.style.display = "none";
+  mainSite.style.display = "block";
+  music.play();
+  document.body.style.overflow = "auto"; // разблокировка скролла
+  window.scrollTo(0, 0);
+});
+
+// Управление музыкой
+function toggleMusic() {
+  if (music.paused) music.play();
+  else music.pause();
+}
+
+// Таймер до свадьбы
+const weddingDate = new Date("June 15, 2026 15:00");
+function updateTimer() {
+  const now = new Date();
+  const diff = weddingDate - now;
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
+  const timer = document.getElementById("timer");
+  if(timer) timer.innerHTML = days + " дней " + hours + " часов " + minutes + " минут";
+}
+setInterval(updateTimer, 1000);
+
+// RSVP форма
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  document.getElementById("successMsg").style.display = "block";
+  this.style.display = "none";
+});
+
+
+</script>
+
+</body>
+</html>
